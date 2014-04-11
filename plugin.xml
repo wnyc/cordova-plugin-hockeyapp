@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="org.nypr.cordova.hockeyappplugin"
+    version="0.1.0">
+    <name>Device</name>
+    <description>HockeyApp Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>hockeyapp,crash reporting,update</keywords>
+    <repo>git@git.wnyc.net:mobile/cordova/cordova-plugin-hockeyapp.git</repo>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="HockeyAppPlugin" >
+                <param name="android-package" value="org.nypr.cordova.hockeyappplugin.HockeyAppPlugin"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+          <uses-permission android:name="android.permission.INTERNET" />
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+          <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+          <activity android:name="net.hockeyapp.android.UpdateActivity" />
+        </config-file>
+
+        <source-file src="src/android/HockeyAppPlugin.java" target-dir="src/org/nypr/cordova/hockeyappplugin/" />
+        <source-file src="src/android/HockeySDK.jar" target-dir="libs" />
+    </platform>
+
+    <!-- ios -->
+    <!--
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="Device">
+                <param name="ios-package" value="CDVDevice"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CDVDevice.h" />
+        <source-file src="src/ios/CDVDevice.m" />
+    </platform>
+    -->
+</plugin>
