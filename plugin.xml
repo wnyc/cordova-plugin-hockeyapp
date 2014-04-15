@@ -33,16 +33,28 @@
     </platform>
 
     <!-- ios -->
-    <!--
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
-            <feature name="Device">
-                <param name="ios-package" value="CDVDevice"/>
+            <feature name="HockeyAppPlugin">
+                <param name="ios-package" value="HockeyAppPlugin" />
+                <param name="onload" value="true" />
             </feature>
         </config-file>
 
-        <header-file src="src/ios/CDVDevice.h" />
-        <source-file src="src/ios/CDVDevice.m" />
+        <header-file src="src/ios/HockeyAppPlugin.h" />
+
+        <source-file src="src/ios/HockeyAppPlugin.m" />
+        
+        <resource-file src="src/ios/HockeySDK.embeddedframework/Resources/HockeySDKResources.bundle" />
+        <resource-file src="src/ios/HockeySDK.embeddedframework/Resources/HockeySDK.xcconfig" />
+
+        <framework src="src/ios/HockeySDK.embeddedframework/HockeySDK.framework" custom="true"/>
+        <framework src="CoreText.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="Foundation.framework" />
+        <framework src="QuartzCore.framework" />
+        <framework src="Security.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="UIKit.framework" />
     </platform>
-    -->
 </plugin>
