@@ -18,14 +18,15 @@ public class HockeyAppPlugin extends CordovaPlugin {
 	@Override
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
+	  _checkForCrashes();
+	  _checkForUpdates();
 		Log.d(LOG_TAG, "HockeyApp Plugin initialized");
 	}
 	
 	@Override
 	public void onResume(boolean multitasking) {
 		Log.d(LOG_TAG, "HockeyApp Plugin resuming");
-	    _checkForCrashes();
-	    _checkForUpdates();
+	  _checkForUpdates();
 		super.onResume(multitasking);
 	}
 	
