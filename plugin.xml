@@ -56,5 +56,6 @@
         <framework src="Security.framework" />
         <framework src="SystemConfiguration.framework" />
         <framework src="UIKit.framework" />
+        <framework src="QuickLook.framework" />
     </platform>
 </plugin>
