@@ -15,6 +15,7 @@
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="HockeyAppPlugin" >
                 <param name="android-package" value="org.nypr.cordova.hockeyappplugin.HockeyAppPlugin"/>
+                <param name="onload" value="true" />
             </feature>
         </config-file>
 
