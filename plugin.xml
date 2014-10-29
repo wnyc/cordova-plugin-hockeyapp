@@ -29,7 +29,7 @@
         </config-file>
 
         <source-file src="src/android/HockeyAppPlugin.java" target-dir="src/org/nypr/cordova/hockeyappplugin/" />
-        <source-file src="src/android/HockeySDK.jar" target-dir="libs" />
+        <source-file src="src/android/HockeySDK-3.0.2.jar" target-dir="libs" />
     </platform>
 
     <!-- ios -->
