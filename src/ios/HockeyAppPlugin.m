@@ -1,9 +1,5 @@
 //
 //  HockeyAppPlugin.m
-//  NYPRNative
-//
-//  Created by Bradford Kammin on 4/1/14.
-//
 //
 
 #import <HockeySDK/HockeySDK.h>
