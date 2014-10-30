@@ -6,7 +6,7 @@ This plugin supports PhoneGap/Cordova apps running on both iOS and Android.
 
 ### Version Requirements
 
-This plugin is meant to work with Cordova 3.4.0+ and the latest version of the HockeyApp library.
+This plugin is meant to work with Cordova 3.5.0+ and the latest version of the HockeyApp library.
 
 SDK documentation and integration guides for IOS and Android:
 [website](http://support.hockeyapp.net/kb/client-integration-ios-mac-os-x/hockeyapp-for-ios)
@@ -17,7 +17,7 @@ TODO - update plugin to latest SDK versions
 ## Installation
 
 #### Automatic Installation using PhoneGap/Cordova CLI (iOS and Android)
-1. For iOS, make sure you update your iOS project to Cordova iOS version 3.4.1+ before installing this plugin.
+1. For iOS, make sure you update your iOS project to Cordova iOS version 3.5.0+ before installing this plugin.
 
         cordova platform update ios
 
@@ -34,7 +34,3 @@ TODO - update plugin to latest SDK versions
    Todo: better way to turn update check on/off (Android only) than having build script comment out code between __HOCKEY_APP_UPDATE_ACTIVE_START__ and __HOCKEY_APP_UPDATE_ACTIVE_END__ in HockeyAppPlugin.java 
    Todo: pull GA key from configuration setting
 
-#### iOS manual installation (unnecessary if installed automatically)
-
-#### Android manual installation (unnecessary if installed automatically)
-    
