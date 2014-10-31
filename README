@@ -17,13 +17,14 @@ TODO - update plugin to latest SDK versions
 ## Installation
 
 #### Automatic Installation using PhoneGap/Cordova CLI (iOS and Android)
-1. For iOS, make sure you update your iOS project to Cordova iOS version 3.5.0+ before installing this plugin.
+1. Make sure you update your projects to Cordova iOS version 3.5.0+ before installing this plugin.
 
         cordova platform update ios
+        cordova platform update android
 
 2. Install this plugin using PhoneGap/Cordova cli:
 
-        cordova plugin add https://github.com/wnyc/cordova-plugin-hockeyapp.git <FIXME>
+        cordova plugin add https://github.com/wnyc/cordova-plugin-hockeyapp.git
 
 3. For iOS, modify HockeyAppPlugin.m, replacing with your configuration setting:
      NSString * hockeyAppKey = @"__HOCKEY_APP_KEY__";
