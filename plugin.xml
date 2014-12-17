@@ -10,6 +10,10 @@
     <keywords>hockeyapp,crash reporting,update</keywords>
     <repo>git@git.wnyc.net:mobile/cordova/cordova-plugin-hockeyapp.git</repo>
 
+    <js-module src="www/hockeyapp.js" name="HockeyApp">
+      <clobbers target="hockeyapp"/>
+    </js-module>
+
     <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">

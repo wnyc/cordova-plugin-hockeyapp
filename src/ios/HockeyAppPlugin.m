@@ -26,4 +26,10 @@
     NSLog(@"HockeyApp Plugin initialized");
 }
 
+#pragma mark Plugin methods
+
+- (void)forcecrash:(CDVInvokedUrlCommand *)command {
+  __builtin_trap();
+}
+
 @end
