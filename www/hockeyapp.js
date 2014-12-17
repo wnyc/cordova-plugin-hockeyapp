@@ -6,7 +6,7 @@ var exec = require("cordova/exec");
 var HockeyApp = function(){};
 
 HockeyApp.prototype.forcecrash = function(success, error) {
-  exec(success, error, "HockeyAppPlugin", "forcerash", null);
+  exec(success, error, "HockeyAppPlugin", "forcecrash", null);
 };
 
 module.exports = new HockeyApp();
