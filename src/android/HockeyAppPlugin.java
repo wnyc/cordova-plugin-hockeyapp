@@ -11,6 +11,8 @@ import org.json.JSONArray;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.lang.RuntimeException;
+import java.lang.Runnable;
+import java.lang.Thread;
 
 import android.util.Log;
 
@@ -36,9 +38,13 @@ public class HockeyAppPlugin extends CordovaPlugin {
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
     boolean ret=true;
     if(action.equalsIgnoreCase("forcecrash")){
-      Calendar c = Calendar.getInstance();
-      SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-      throw new RuntimeException("Test crash at " + df.format(c.getTime())); 
+      new Thread(new Runnable() {
+        public void run() {
+          Calendar c = Calendar.getInstance();
+          SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+          throw new RuntimeException("Test crash at " + df.format(c.getTime()));
+        }
+      }).start();
     }else{
       callbackContext.error(LOG_TAG + " error: invalid action (" + action + ")");
       ret=false;
