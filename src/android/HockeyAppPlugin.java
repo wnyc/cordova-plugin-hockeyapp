@@ -29,12 +29,18 @@ public class HockeyAppPlugin extends CordovaPlugin {
 	  _checkForUpdates();
 		super.onResume(multitasking);
 	}
-	
-	@Override
-	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-		callbackContext.error(LOG_TAG + " error: invalid action (" + action + ")");
-		return false;
-	}
+
+  @Override
+  public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
+    boolean ret=true;
+    if(action.equalsIgnoreCase("forcecrash")){
+      int i = 1/0;
+    }else{
+      callbackContext.error(LOG_TAG + " error: invalid action (" + action + ")");
+      ret=false;
+    }
+    return ret;
+  }
 		
 	@Override
 	public void onDestroy() {
