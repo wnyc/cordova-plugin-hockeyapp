@@ -8,7 +8,9 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
-import org.json.JSONException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.lang.RuntimeException;
 
 import android.util.Log;
 
@@ -34,7 +36,9 @@ public class HockeyAppPlugin extends CordovaPlugin {
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
     boolean ret=true;
     if(action.equalsIgnoreCase("forcecrash")){
-      int i = 1/0;
+      Calendar c = Calendar.getInstance();
+      SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+      throw new RuntimeException("Test crash at " + df.format(c.getTime())); 
     }else{
       callbackContext.error(LOG_TAG + " error: invalid action (" + action + ")");
       ret=false;
