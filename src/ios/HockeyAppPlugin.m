@@ -36,7 +36,7 @@ static NSString *const kHockeyAppPluginAppReachedTerminateEventKey = @"AppReache
         // reference for deleting crash report file:
         // http://support.hockeyapp.net/discussions/problems/33370-is-there-a-way-to-manually-send-the-most-recent-crash-report-after-changing-the-crash-reporting-status
         BOOL appReachedTerminateEvent = [[[NSUserDefaults standardUserDefaults] valueForKey:kHockeyAppPluginAppReachedTerminateEventKey] boolValue];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AppReachedTerminateEvent"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kHockeyAppPluginAppReachedTerminateEventKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
 
         if (appReachedTerminateEvent) {
