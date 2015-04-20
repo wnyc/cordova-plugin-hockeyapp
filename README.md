@@ -12,7 +12,9 @@ SDK documentation and integration guides for IOS and Android:
 http://support.hockeyapp.net/kb/client-integration-ios-mac-os-x/hockeyapp-for-ios  
 http://support.hockeyapp.net/kb/client-integration-android-other-platforms/hockeyapp-for-android-sdk  
 
-TODO - update plugin to latest SDK versions 
+### HockeySDK-Versions being used:
+- iOS - 2014/11/25 - Stable - Version 3.6.2
+- Android - 2014/12/23 - Stable - Version 3.5.0
 
 ## Installation
 
@@ -27,14 +29,13 @@ TODO - update plugin to latest SDK versions
         cordova plugin add https://github.com/wnyc/cordova-plugin-hockeyapp.git
 
 3. For iOS, modify HockeyAppPlugin.m, replacing with your configuration setting:
-     
+
         NSString * hockeyAppKey = @"__HOCKEY_APP_KEY__";
 
    For Android, modify HockeyAppPlugin.java, replacing with your configuration setting:
 
         String hockeyAppId="__HOCKEY_APP_KEY__";
 
-   Todo: better way to turn update check on/off (Android only) than having build script comment out code between __HOCKEY_APP_UPDATE_ACTIVE_START__ and __HOCKEY_APP_UPDATE_ACTIVE_END__ in HockeyAppPlugin.java 
+   Todo: better way to turn update check on/off (Android only) than having build script comment out code between __HOCKEY_APP_UPDATE_ACTIVE_START__ and __HOCKEY_APP_UPDATE_ACTIVE_END__ in HockeyAppPlugin.java
 
    Todo: pull GA key from configuration setting
-
