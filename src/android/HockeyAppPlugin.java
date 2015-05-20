@@ -25,7 +25,7 @@ public class HockeyAppPlugin extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
 
-        if(HOCKEY_APP_ID!=null && !HOCKEY_APP_ID.equals("") && !HOCKEY_APP_ID.contains("__HOCKEY_APP_ID__")) {
+        if(isHockeyAppIdValid()) {
             checkForCrashes();
             checkForUpdates();
 
@@ -38,7 +38,7 @@ public class HockeyAppPlugin extends CordovaPlugin {
     @Override
     public void onResume(boolean multitasking) {
         Log.d(LOG_TAG, "HockeyApp Plugin resuming");
-        checkForUpdates();
+        if (isHockeyAppIdValid()) checkForUpdates();
         super.onResume(multitasking);
     }
 
@@ -80,6 +80,10 @@ public class HockeyAppPlugin extends CordovaPlugin {
     protected void checkForUpdates() {
         Log.d(LOG_TAG, "HockeyApp Plugin checking for updates");
         UpdateManager.register(cordova.getActivity(), HOCKEY_APP_ID);
+    }
+
+    protected boolean isHockeyAppIdValid() {
+        return HOCKEY_APP_ID!=null && !HOCKEY_APP_ID.equals("") && !HOCKEY_APP_ID.contains("__HOCKEY_APP_ID__");
     }
 
 }
