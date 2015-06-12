@@ -14,6 +14,8 @@
       <clobbers target="hockeyapp"/>
     </js-module>
 
+    <preference name="HOCKEY_APP_ID" />
+
     <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
@@ -21,6 +23,11 @@
                 <param name="android-package" value="org.nypr.cordova.hockeyappplugin.HockeyAppPlugin"/>
                 <param name="onload" value="true" />
             </feature>
+        </config-file>
+
+        <source-file src="platforms/android/res/values/hockeyappplugin.xml" target-dir="res/values" />
+        <config-file target="res/values/hockeyappplugin.xml" parent="/*">
+          <string name="hockey_app_id">$HOCKEY_APP_ID</string>
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/*">
@@ -51,7 +58,7 @@
         <header-file src="src/ios/HockeyAppPlugin.h" />
 
         <source-file src="src/ios/HockeyAppPlugin.m" />
-        
+
         <resource-file src="src/ios/HockeySDK.embeddedframework/Resources/HockeySDKResources.bundle" />
         <resource-file src="src/ios/HockeySDK.embeddedframework/Resources/HockeySDK.xcconfig" />
 

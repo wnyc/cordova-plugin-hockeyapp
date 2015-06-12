@@ -18,12 +18,14 @@ import android.util.Log;
 public class HockeyAppPlugin extends CordovaPlugin {
     protected static final String LOG_TAG = "HockeyAppPlugin";
 
-    // replaced by build script. better to pull from a a config file?
-    private static final String HOCKEY_APP_ID = "__HOCKEY_APP_ID__";
+    private String hockeyAppId;
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
+
+        int appResId = cordova.getActivity().getResources().getIdentifier("hockey_app_id", "string", cordova.getActivity().getPackageName());
+        hockeyAppId = cordova.getActivity().getString(appResId);
 
         if(isHockeyAppIdValid()) {
             checkForCrashes();
@@ -74,16 +76,16 @@ public class HockeyAppPlugin extends CordovaPlugin {
 
     protected void checkForCrashes() {
         Log.d(LOG_TAG, "HockeyApp Plugin checking for crashes");
-        CrashManager.register(cordova.getActivity(), HOCKEY_APP_ID);
+        CrashManager.register(cordova.getActivity(), hockeyAppId);
     }
 
     protected void checkForUpdates() {
         Log.d(LOG_TAG, "HockeyApp Plugin checking for updates");
-        UpdateManager.register(cordova.getActivity(), HOCKEY_APP_ID);
+        UpdateManager.register(cordova.getActivity(), hockeyAppId);
     }
 
     protected boolean isHockeyAppIdValid() {
-        return HOCKEY_APP_ID!=null && !HOCKEY_APP_ID.equals("") && !HOCKEY_APP_ID.contains("__HOCKEY_APP_ID__");
+        return hockeyAppId!=null || !hockeyAppId.equals("");
     }
 
 }
