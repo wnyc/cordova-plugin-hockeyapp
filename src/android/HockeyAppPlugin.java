@@ -89,7 +89,7 @@ public class HockeyAppPlugin extends CordovaPlugin {
 	}
 
 	protected void _checkForUpdates() {
-		if(isStore === false){
+		if(isStore == false){
       Log.d(LOG_TAG, "HockeyApp Plugin checking for updates");
       if(hockeyAppId!=null && !hockeyAppId.equals("") && !hockeyAppId.contains("HOCKEY_APP_KEY")){		
         UpdateManager.register(cordova.getActivity(), hockeyAppId);
