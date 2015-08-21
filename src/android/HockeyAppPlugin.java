@@ -15,13 +15,22 @@ import java.lang.Runnable;
 import java.lang.Thread;
 
 import android.util.Log;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 
 public class HockeyAppPlugin extends CordovaPlugin {
 	protected static final String LOG_TAG = "HockeyAppPlugin";
+  protected String hockeyAppId;
 	
 	@Override
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
+
+    Context context = this.cordova.getActivity().getApplicationContext();
+    ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+    hockeyAppId = ai.metaData.getString("hockey_app_api_key");
+
 	  _checkForCrashes();
 	  _checkForUpdates();
 		Log.d(LOG_TAG, "HockeyApp Plugin initialized");
@@ -66,7 +75,6 @@ public class HockeyAppPlugin extends CordovaPlugin {
 	
 	protected void _checkForCrashes() {
 		Log.d(LOG_TAG, "HockeyApp Plugin checking for crashes");
-		String hockeyAppId="__HOCKEY_APP_KEY__"; // replaced by build script. better to pull from a a config file?
 		if(hockeyAppId!=null && !hockeyAppId.equals("") && !hockeyAppId.contains("HOCKEY_APP_KEY")){
 			CrashManager.register(cordova.getActivity(), hockeyAppId);
 		}
@@ -76,7 +84,6 @@ public class HockeyAppPlugin extends CordovaPlugin {
 		// Remove this for store builds!
 		//__HOCKEY_APP_UPDATE_ACTIVE_START__
 		Log.d(LOG_TAG, "HockeyApp Plugin checking for updates");
-		String hockeyAppId="__HOCKEY_APP_KEY__";
 		if(hockeyAppId!=null && !hockeyAppId.equals("") && !hockeyAppId.contains("HOCKEY_APP_KEY")){		
 			UpdateManager.register(cordova.getActivity(), hockeyAppId);
 		}
