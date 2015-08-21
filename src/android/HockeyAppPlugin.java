@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.lang.RuntimeException;
 import java.lang.Runnable;
 import java.lang.Thread;
+import java.lang.Exception;
 
 import android.util.Log;
 import android.content.Context;
@@ -27,9 +28,14 @@ public class HockeyAppPlugin extends CordovaPlugin {
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
 
-    Context context = this.cordova.getActivity().getApplicationContext();
-    ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-    hockeyAppId = ai.metaData.getString("hockey_app_api_key");
+    try{
+      Context context = cordova.getActivity().getApplicationContext();
+      ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+      
+      hockeyAppId = ai.metaData.getString("hockey_app_api_key");
+    } catch (Exception e) {
+      Log.e("Unexpected error while reading application info.", e);
+		}
 
 	  _checkForCrashes();
 	  _checkForUpdates();
