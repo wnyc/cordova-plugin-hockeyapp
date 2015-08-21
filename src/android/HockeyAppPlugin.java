@@ -23,6 +23,7 @@ import android.content.pm.PackageManager;
 public class HockeyAppPlugin extends CordovaPlugin {
 	protected static final String LOG_TAG = "HockeyAppPlugin";
   protected String hockeyAppId;
+  protected Boolean isStore = false;
 	
 	@Override
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -33,6 +34,7 @@ public class HockeyAppPlugin extends CordovaPlugin {
       ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
       
       hockeyAppId = ai.metaData.getString("hockey_app_api_key");
+      isStore = ai.metaData.getBoolean("hockey_app_is_store");
     } catch (Exception e) {
       Log.e(LOG_TAG, "Unexpected error while reading application info.", e);
 		}
@@ -87,12 +89,11 @@ public class HockeyAppPlugin extends CordovaPlugin {
 	}
 
 	protected void _checkForUpdates() {
-		// Remove this for store builds!
-		//__HOCKEY_APP_UPDATE_ACTIVE_START__
-		Log.d(LOG_TAG, "HockeyApp Plugin checking for updates");
-		if(hockeyAppId!=null && !hockeyAppId.equals("") && !hockeyAppId.contains("HOCKEY_APP_KEY")){		
-			UpdateManager.register(cordova.getActivity(), hockeyAppId);
+		if(isStore === false){
+      Log.d(LOG_TAG, "HockeyApp Plugin checking for updates");
+      if(hockeyAppId!=null && !hockeyAppId.equals("") && !hockeyAppId.contains("HOCKEY_APP_KEY")){		
+        UpdateManager.register(cordova.getActivity(), hockeyAppId);
+      }
 		}
-		//__HOCKEY_APP_UPDATE_ACTIVE_END__
 	}
 }

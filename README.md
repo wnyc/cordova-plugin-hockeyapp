@@ -12,8 +12,6 @@ SDK documentation and integration guides for IOS and Android:
 http://support.hockeyapp.net/kb/client-integration-ios-mac-os-x/hockeyapp-for-ios  
 http://support.hockeyapp.net/kb/client-integration-android-other-platforms/hockeyapp-for-android-sdk  
 
-TODO - update plugin to latest SDK versions 
-
 ## Installation
 
 #### Automatic Installation using PhoneGap/Cordova CLI (iOS and Android)
@@ -24,7 +22,5 @@ TODO - update plugin to latest SDK versions
 
 2. Install this plugin using PhoneGap/Cordova cli:
 
-        cordova plugin add https://github.com/wnyc/cordova-plugin-hockeyapp.git --variable IOS_API_KEY="YOUR_IOS_APP_API_KEY" --variable ANDROID_API_KEY="YOUR_ANDROID_APP_API_KEY"
-
-   Todo: better way to turn update check on/off (Android only) than having build script comment out code between __HOCKEY_APP_UPDATE_ACTIVE_START__ and __HOCKEY_APP_UPDATE_ACTIVE_END__ in HockeyAppPlugin.java 
+        cordova plugin add https://github.com/wnyc/cordova-plugin-hockeyapp.git --variable IOS_API_KEY="YOUR_IOS_APP_API_KEY" --variable ANDROID_API_KEY="YOUR_ANDROID_APP_API_KEY" --variable IS_STORE=true
 
