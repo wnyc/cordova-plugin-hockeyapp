@@ -68,6 +68,7 @@
         <resource-file src="src/ios/HockeySDK.framework/Resources/HockeySDKResources.bundle" />
         <resource-file src="src/ios/HockeySDK.framework/Resources/HockeySDK.xcconfig" />
 
+        <framework src="libc++.dylib" />
         <framework src="src/ios/HockeySDK.framework" custom="true"/>
         <framework src="AssetsLibrary.framework" />
         <framework src="CoreText.framework" />
