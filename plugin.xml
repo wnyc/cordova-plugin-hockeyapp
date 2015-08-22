@@ -65,10 +65,10 @@
 
         <source-file src="src/ios/HockeyAppPlugin.m" />
         
-        <resource-file src="src/ios/HockeySDK.embeddedframework/Resources/HockeySDKResources.bundle" />
-        <resource-file src="src/ios/HockeySDK.embeddedframework/Resources/HockeySDK.xcconfig" />
+        <resource-file src="src/ios/HockeySDK.framework/Resources/HockeySDKResources.bundle" />
+        <resource-file src="src/ios/HockeySDK.framework/Resources/HockeySDK.xcconfig" />
 
-        <framework src="src/ios/HockeySDK.embeddedframework/HockeySDK.framework" custom="true"/>
+        <framework src="src/ios/HockeySDK.framework" custom="true"/>
         <framework src="AssetsLibrary.framework" />
         <framework src="CoreText.framework" />
         <framework src="CoreGraphics.framework" />
