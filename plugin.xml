@@ -16,6 +16,9 @@
 
     <!-- android -->
     <platform name="android">
+        <preference name="ANDROID_API_KEY"/>
+        <preference name="IS_STORE"/>
+      
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="HockeyAppPlugin" >
                 <param name="android-package" value="org.nypr.cordova.hockeyappplugin.HockeyAppPlugin"/>
@@ -32,18 +35,28 @@
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
           <activity android:name="net.hockeyapp.android.UpdateActivity" />
         </config-file>
+        <config-file target="AndroidManifest.xml" parent="application">
+          <meta-data android:name="hockey_app_api_key" android:value="$ANDROID_API_KEY"/>
+          <meta-data android:name="hockey_app_is_store" android:value="$IS_STORE"/>
+        </config-file>
 
         <source-file src="src/android/HockeyAppPlugin.java" target-dir="src/org/nypr/cordova/hockeyappplugin/" />
-        <source-file src="src/android/HockeySDK-3.0.2.jar" target-dir="libs" />
+        <source-file src="src/android/HockeySDK-3.5.0.jar" target-dir="libs" />
     </platform>
 
     <!-- ios -->
     <platform name="ios">
+        <preference name="IOS_API_KEY"/>
+        
         <config-file target="config.xml" parent="/*">
             <feature name="HockeyAppPlugin">
                 <param name="ios-package" value="HockeyAppPlugin" />
                 <param name="onload" value="true" />
             </feature>
+        </config-file>
+        
+        <config-file target="*-Info.plist" parent="HockeyAppApiKey">
+            <string>$IOS_API_KEY</string>
         </config-file>
 
         <dependency id="org.nypr.cordova.nslogger-cocoalumberjack-connector-plugin" url="https://github.com/wnyc/cordova-plugin-nslogger-cocoalumberjack-connector.git"  />
@@ -52,10 +65,11 @@
 
         <source-file src="src/ios/HockeyAppPlugin.m" />
         
-        <resource-file src="src/ios/HockeySDK.embeddedframework/Resources/HockeySDKResources.bundle" />
-        <resource-file src="src/ios/HockeySDK.embeddedframework/Resources/HockeySDK.xcconfig" />
+        <resource-file src="src/ios/HockeySDK.framework/Resources/HockeySDKResources.bundle" />
+        <resource-file src="src/ios/HockeySDK.framework/Resources/HockeySDK.xcconfig" />
 
-        <framework src="src/ios/HockeySDK.embeddedframework/HockeySDK.framework" custom="true"/>
+        <framework src="libc++.dylib" />
+        <framework src="src/ios/HockeySDK.framework" custom="true"/>
         <framework src="AssetsLibrary.framework" />
         <framework src="CoreText.framework" />
         <framework src="CoreGraphics.framework" />
@@ -66,6 +80,5 @@
         <framework src="Security.framework" />
         <framework src="SystemConfiguration.framework" />
         <framework src="UIKit.framework" />
-        <framework src="QuickLook.framework" />
     </platform>
 </plugin>

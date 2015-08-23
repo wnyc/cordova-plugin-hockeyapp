@@ -22,7 +22,9 @@ static NSString *const kHockeyAppPluginAppReachedTerminateEventKey = @"AppReache
 #pragma mark Initialization
 
 - (void)pluginInitialize {
-    NSString * hockeyAppKey = @"__HOCKEY_APP_KEY__";
+    NSDictionary *infoPlist = [[NSBundle mainBundle] infoDictionary];
+    NSString * hockeyAppKey = [infoPlist objectForKey:@"HockeyAppApiKey"];
+
     if( hockeyAppKey!=nil && [hockeyAppKey isEqualToString:@""]==NO && [hockeyAppKey rangeOfString:@"HOCKEY_APP_KEY"].location == NSNotFound ){
 
         // initialize before HockeySDK, so the delegate can access the file logger

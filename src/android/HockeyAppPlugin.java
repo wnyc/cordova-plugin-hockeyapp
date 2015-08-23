@@ -13,15 +13,32 @@ import java.util.Calendar;
 import java.lang.RuntimeException;
 import java.lang.Runnable;
 import java.lang.Thread;
+import java.lang.Exception;
 
 import android.util.Log;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 
 public class HockeyAppPlugin extends CordovaPlugin {
 	protected static final String LOG_TAG = "HockeyAppPlugin";
+  protected String hockeyAppId;
+  protected Boolean isStore = false;
 	
 	@Override
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
+
+    try{
+      Context context = cordova.getActivity().getApplicationContext();
+      ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+      
+      hockeyAppId = ai.metaData.getString("hockey_app_api_key");
+      isStore = ai.metaData.getBoolean("hockey_app_is_store");
+    } catch (Exception e) {
+      Log.e(LOG_TAG, "Unexpected error while reading application info.", e);
+		}
+
 	  _checkForCrashes();
 	  _checkForUpdates();
 		Log.d(LOG_TAG, "HockeyApp Plugin initialized");
@@ -66,20 +83,17 @@ public class HockeyAppPlugin extends CordovaPlugin {
 	
 	protected void _checkForCrashes() {
 		Log.d(LOG_TAG, "HockeyApp Plugin checking for crashes");
-		String hockeyAppId="__HOCKEY_APP_KEY__"; // replaced by build script. better to pull from a a config file?
 		if(hockeyAppId!=null && !hockeyAppId.equals("") && !hockeyAppId.contains("HOCKEY_APP_KEY")){
 			CrashManager.register(cordova.getActivity(), hockeyAppId);
 		}
 	}
 
 	protected void _checkForUpdates() {
-		// Remove this for store builds!
-		//__HOCKEY_APP_UPDATE_ACTIVE_START__
-		Log.d(LOG_TAG, "HockeyApp Plugin checking for updates");
-		String hockeyAppId="__HOCKEY_APP_KEY__";
-		if(hockeyAppId!=null && !hockeyAppId.equals("") && !hockeyAppId.contains("HOCKEY_APP_KEY")){		
-			UpdateManager.register(cordova.getActivity(), hockeyAppId);
+		if(isStore == false){
+      Log.d(LOG_TAG, "HockeyApp Plugin checking for updates");
+      if(hockeyAppId!=null && !hockeyAppId.equals("") && !hockeyAppId.contains("HOCKEY_APP_KEY")){		
+        UpdateManager.register(cordova.getActivity(), hockeyAppId);
+      }
 		}
-		//__HOCKEY_APP_UPDATE_ACTIVE_END__
 	}
 }
