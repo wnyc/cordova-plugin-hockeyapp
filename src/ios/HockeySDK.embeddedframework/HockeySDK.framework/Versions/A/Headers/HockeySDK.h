@@ -27,8 +27,13 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef HockeySDK_h
-#define HockeySDK_h
+#import <Foundation/Foundation.h>
+
+
+#if !defined (TARGET_OS_IOS) // Defined starting in iOS 9
+#define TARGET_OS_IOS 1
+#endif
+
 
 #import "HockeySDKFeatureConfig.h"
 
@@ -71,7 +76,10 @@
 #import "BITAuthenticator.h"
 #endif
 
-// Notification message which HockeyManager is listening to, to retry requesting updated from the server
+// Notification message which HockeyManager is listening to, to retry requesting updated from the server.
+// This can be used by app developers to trigger additional points where the HockeySDK can try sending
+// pending crash reports or feedback messages.
+// By default the SDK retries sending pending data only when the app becomes active.
 #define BITHockeyNetworkDidBecomeReachableNotification @"BITHockeyNetworkDidBecomeReachable"
 
 
@@ -208,5 +216,3 @@ typedef NS_ENUM(NSInteger, BITHockeyErrorReason) {
 };
 extern NSString *const __attribute__((unused)) kBITHockeyErrorDomain;
 
-
-#endif
