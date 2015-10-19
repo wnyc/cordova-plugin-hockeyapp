@@ -67,5 +67,6 @@
         <framework src="SystemConfiguration.framework" />
         <framework src="UIKit.framework" />
         <framework src="QuickLook.framework" />
+        <framework src="libc++.tbd" />
     </platform>
 </plugin>
