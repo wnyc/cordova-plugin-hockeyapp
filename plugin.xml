@@ -41,7 +41,7 @@
         </config-file>
 
         <source-file src="src/android/HockeyAppPlugin.java" target-dir="src/org/nypr/cordova/hockeyappplugin/" />
-        <source-file src="src/android/HockeySDK-3.5.0.jar" target-dir="libs" />
+        <source-file src="src/android/HockeySDK-3.6.2.jar" target-dir="libs" />
     </platform>
 
     <!-- ios -->
@@ -68,7 +68,7 @@
         <resource-file src="src/ios/HockeySDK.framework/Resources/HockeySDKResources.bundle" />
         <resource-file src="src/ios/HockeySDK.framework/Resources/HockeySDK.xcconfig" />
 
-        <framework src="libc++.dylib" />
+        <framework src="libc++.tbd" />
         <framework src="src/ios/HockeySDK.framework" custom="true"/>
         <framework src="AssetsLibrary.framework" />
         <framework src="CoreText.framework" />
