@@ -1,7 +1,6 @@
 package org.nypr.cordova.hockeyappplugin;
 
-import net.hockeyapp.android.CrashManager;
-import net.hockeyapp.android.UpdateManager;
+import net.hockeyapp.android.*;
 
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
@@ -17,22 +16,33 @@ import java.lang.Thread;
 import android.util.Log;
 
 public class HockeyAppPlugin extends CordovaPlugin {
-	protected static final String LOG_TAG = "HockeyAppPlugin";
-	
-	@Override
-	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-		super.initialize(cordova, webView);
-	  _checkForCrashes();
-	  _checkForUpdates();
-		Log.d(LOG_TAG, "HockeyApp Plugin initialized");
-	}
-	
-	@Override
-	public void onResume(boolean multitasking) {
-		Log.d(LOG_TAG, "HockeyApp Plugin resuming");
-	  _checkForUpdates();
-		super.onResume(multitasking);
-	}
+    protected static final String LOG_TAG = "HockeyAppPlugin";
+
+    private String hockeyAppId;
+
+    @Override
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+        super.initialize(cordova, webView);
+
+        int appResId = cordova.getActivity().getResources().getIdentifier("hockey_app_id", "string", cordova.getActivity().getPackageName());
+        hockeyAppId = cordova.getActivity().getString(appResId);
+
+        if(isHockeyAppIdValid()) {
+            checkForCrashes();
+            checkForUpdates();
+
+            Tracking.startUsage(cordova.getActivity());
+
+            Log.d(LOG_TAG, "HockeyApp Plugin initialized");
+        }
+    }
+
+    @Override
+    public void onResume(boolean multitasking) {
+        Log.d(LOG_TAG, "HockeyApp Plugin resuming");
+        if (isHockeyAppIdValid()) checkForUpdates();
+        super.onResume(multitasking);
+    }
 
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
@@ -51,35 +61,31 @@ public class HockeyAppPlugin extends CordovaPlugin {
     }
     return ret;
   }
-		
-	@Override
-	public void onDestroy() {
-		Log.d(LOG_TAG, "HockeyApp Plugin destroying");
-		super.onDestroy();
-	}
 
-	@Override
-	public void onReset() {
-		Log.d(LOG_TAG, "HockeyApp Plugin onReset--WebView has navigated to new page or refreshed.");
-		super.onReset();
-	}
-	
-	protected void _checkForCrashes() {
-		Log.d(LOG_TAG, "HockeyApp Plugin checking for crashes");
-		String hockeyAppId="__HOCKEY_APP_KEY__"; // replaced by build script. better to pull from a a config file?
-		if(hockeyAppId!=null && !hockeyAppId.equals("") && !hockeyAppId.contains("HOCKEY_APP_KEY")){
-			CrashManager.register(cordova.getActivity(), hockeyAppId);
-		}
-	}
+    @Override
+    public void onDestroy() {
+        Log.d(LOG_TAG, "HockeyApp Plugin destroying");
+        super.onDestroy();
+    }
 
-	protected void _checkForUpdates() {
-		// Remove this for store builds!
-		//__HOCKEY_APP_UPDATE_ACTIVE_START__
-		Log.d(LOG_TAG, "HockeyApp Plugin checking for updates");
-		String hockeyAppId="__HOCKEY_APP_KEY__";
-		if(hockeyAppId!=null && !hockeyAppId.equals("") && !hockeyAppId.contains("HOCKEY_APP_KEY")){		
-			UpdateManager.register(cordova.getActivity(), hockeyAppId);
-		}
-		//__HOCKEY_APP_UPDATE_ACTIVE_END__
-	}
+    @Override
+    public void onReset() {
+        Log.d(LOG_TAG, "HockeyApp Plugin onReset--WebView has navigated to new page or refreshed.");
+        super.onReset();
+    }
+
+    protected void checkForCrashes() {
+        Log.d(LOG_TAG, "HockeyApp Plugin checking for crashes");
+        CrashManager.register(cordova.getActivity(), hockeyAppId);
+    }
+
+    protected void checkForUpdates() {
+        Log.d(LOG_TAG, "HockeyApp Plugin checking for updates");
+        UpdateManager.register(cordova.getActivity(), hockeyAppId);
+    }
+
+    protected boolean isHockeyAppIdValid() {
+        return hockeyAppId!=null || !hockeyAppId.equals("");
+    }
+
 }

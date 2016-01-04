@@ -24,17 +24,12 @@ TODO - update plugin to latest SDK versions
 
 2. Install this plugin using PhoneGap/Cordova cli:
 
-        cordova plugin add https://github.com/wnyc/cordova-plugin-hockeyapp.git
+        cordova plugin add https://github.com/kozzztya/cordova-plugin-hockeyapp.git
 
-3. For iOS, modify HockeyAppPlugin.m, replacing with your configuration setting:
+3. For Android add plugin like this
+
+		cordova plugin add https://github.com/kozzztya/cordova-plugin-hockeyapp.git --variable HOCKEY_APP_ID="__HOCKEY_APP_ID__"
+
+   For iOS, modify HockeyAppPlugin.m, replacing with your configuration setting:
      
         NSString * hockeyAppKey = @"__HOCKEY_APP_KEY__";
-
-   For Android, modify HockeyAppPlugin.java, replacing with your configuration setting:
-
-        String hockeyAppId="__HOCKEY_APP_KEY__";
-
-   Todo: better way to turn update check on/off (Android only) than having build script comment out code between __HOCKEY_APP_UPDATE_ACTIVE_START__ and __HOCKEY_APP_UPDATE_ACTIVE_END__ in HockeyAppPlugin.java 
-
-   Todo: pull GA key from configuration setting
-
