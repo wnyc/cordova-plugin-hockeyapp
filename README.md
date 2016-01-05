@@ -32,7 +32,7 @@ TODO - update plugin to latest SDK versions
 
    For Android, modify HockeyAppPlugin.java, replacing with your configuration setting:
 
-        String hockeyAppId="__HOCKEY_APP_KEY__";
+        private static final String HOCKEY_APP_ID = "__HOCKEY_APP_ID__";
 
    Todo: better way to turn update check on/off (Android only) than having build script comment out code between __HOCKEY_APP_UPDATE_ACTIVE_START__ and __HOCKEY_APP_UPDATE_ACTIVE_END__ in HockeyAppPlugin.java 
 
