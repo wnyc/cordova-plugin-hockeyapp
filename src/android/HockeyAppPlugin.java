@@ -34,7 +34,6 @@ public class HockeyAppPlugin extends CordovaPlugin {
       ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
       
       hockeyAppId = ai.metaData.getString("hockey_app_api_key");
-      isStore = ai.metaData.getBoolean("hockey_app_is_store");
     } catch (Exception e) {
       Log.e(LOG_TAG, "Unexpected error while reading application info.", e);
 		}
